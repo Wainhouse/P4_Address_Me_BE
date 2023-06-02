@@ -2,7 +2,7 @@ import express from 'express';
 import passport from 'passport';
 
 
-import { registerUser, loginUser, logoutUser } from '../controllers/authController.js';
+import { registerUser, loginUser } from '../controllers/authController.js';
   
 const router = express.Router();
 
