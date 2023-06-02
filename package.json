@@ -1,0 +1,20 @@
+{
+  "name": "p4_address_me_be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wainhouse/P4_Address_Me_BE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wainhouse/P4_Address_Me_BE/issues"
+  },
+  "homepage": "https://github.com/Wainhouse/P4_Address_Me_BE#readme"
+}
