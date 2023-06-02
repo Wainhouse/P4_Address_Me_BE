@@ -48,20 +48,18 @@ export async function logoutUser(req, res) {
     }
   }
 
-export async function updatePassword(req, res, next) {
-    const { newPassword } = req.body;
-    const userId = req.session.passport.user;
+export async function deleteUser(req, res, next) {
+    const userId = req.params.id;
   
     try {
-      const user = await User.findByIdAndUpdate(userId, {
-        password: newPassword,
-      });
-  
+      const deletedUser = await User.findByIdAndDelete(userId);
+      if (!deletedUser) {
+        return res.status(404).json({ message: 'User not found' });
+      }
       res
         .status(200)
-        .json({ message: 'Password successfully updated', pw: user.password });
+        .json({ message: 'User deleted successfully', user: deletedUser });
     } catch (err) {
       next(err);
     }
-  }
-  
+  }  

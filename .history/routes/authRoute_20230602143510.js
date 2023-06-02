@@ -2,7 +2,7 @@ import express from 'express';
 import passport from 'passport';
 
 
-import { registerUser, loginUser, logoutUser, updatePassword } from '../controllers/authController.js';
+import { registerUser, loginUser, logoutUser, deleteUser } from '../controllers/authController.js';
   
 const router = express.Router();
 
@@ -18,7 +18,7 @@ router.patch(
     passport.authenticate('local'),
     updatePassword
   );
-
+  
 router.use((err, req, res, next) => {
     // Duplicate Key Error (Email already in-use)
     if (err.name === 'MongoServerError' && err.code === 11000) {
