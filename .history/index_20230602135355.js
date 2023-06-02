@@ -18,12 +18,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Run DB config
-import './db/connection.js';
-
-// Use passport local strategy
-import './config/passport.js';
-
 // Create a session cookie
 app.use(
     session({
