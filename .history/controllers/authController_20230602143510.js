@@ -48,7 +48,7 @@ export async function logoutUser(req, res) {
     }
   }
 
-export async function updatePassword(req, res, next) {
+  export async function updatePassword(req, res, next) {
     const { newPassword } = req.body;
     const userId = req.session.passport.user;
   
