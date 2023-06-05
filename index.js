@@ -50,6 +50,18 @@ app.get('/api', (req, res) => {
   
 app.use('/api/auth', authRoute);
 
+app.use((err, req, res, next) => {
+  console.error(err); // Log the error for debugging purposes
+
+  // Handle specific error types
+  if (err.name === 'ValidationError') {
+    return res.status(400).json({ message: 'Validation error' });
+  }
+
+  // General error handling
+  res.status(500).json({ message: 'Internal server error' });
+});
+
 const { PORT = 9090 } = process.env;
 
 app.listen(PORT, () => {
