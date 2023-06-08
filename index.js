@@ -8,8 +8,10 @@ import MongoStore from 'connect-mongo';
 import './db/connection.js';
 
 
-// Routes
+
+// Routes Import
 import authRoute from './routes/authRoute.js';
+import addressRoute from './routes/addressRoute.js';
 
 dotenv.config();
 const app = express();
@@ -47,8 +49,10 @@ app.use(passport.session());
 app.get('/api', (req, res) => {
     res.status(200).json({ message: 'Welcome to AddressMe' });
   });
-  
+
+//Routes  
 app.use('/api/auth', authRoute);
+app.use('/api/address', addressRoute);
 
 app.use((err, req, res, next) => {
   console.error(err); // Log the error for debugging purposes
