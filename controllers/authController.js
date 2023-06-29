@@ -51,7 +51,6 @@ export async function logoutUser(req, res) {
 
 export async function updatePassword(req, res, next) {
     const { newPassword } = req.body;
-
     const hashPass = await bcrypt.hash(newPassword, 10)
     const userId = req.session.passport.user;
     console.log(userId);
@@ -59,6 +58,7 @@ export async function updatePassword(req, res, next) {
     try {
       const user = await User.findByIdAndUpdate(userId, {
         password: hashPass
+
       });
   
       res

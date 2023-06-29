@@ -7,12 +7,11 @@ import MongoStore from 'connect-mongo';
 
 import './db/connection.js';
 
-
-
 // Routes Import
 import authRoute from './routes/authRoute.js';
 import addressRoute from './routes/addressRoute.js';
 import userAddressRoute from './routes/userAddressDataRoute.js'
+
 
 dotenv.config();
 const app = express();
@@ -29,6 +28,7 @@ import './config/passport.js';
 
 // Create a session cookie
 app.use(
+
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -48,6 +48,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/api', (req, res) => {
+
   res.status(200).json({ message: 'Welcome to AddressMe' });
 });
 
