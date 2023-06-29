@@ -2,7 +2,7 @@ import Address from '../models/Address.js';
 
 export async function uploadAddresses(req, res) {
   const addresses = req.body;
-  console.log({addresses});
+  console.log({ addresses });
   try {
     // Insert the addresses into the database
     const insertedAddresses = await Address.insertMany(addresses);

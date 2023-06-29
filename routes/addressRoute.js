@@ -4,6 +4,6 @@ import { uploadAddresses } from '../controllers/addressController.js';
 const router = express.Router();
 
 // Route for uploading addresses
-router.post('/uploadAddresses', uploadAddresses);
+router.post('/uploadaddresses', uploadAddresses);
 
 export default router;
