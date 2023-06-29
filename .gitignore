@@ -1,5 +1,7 @@
 /node_modules
 /.history
 /.vscode
+db/data/dev-data/
+db/data/test-data/
 .env
 .env.*
