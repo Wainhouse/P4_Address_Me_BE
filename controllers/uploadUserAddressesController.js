@@ -1,10 +1,10 @@
 import UserAddress from '../models/UserAddressData.js';
 
 export async function uploadUserAddressData(req, res) {
-  const addressData = req.body;
+  const { addressData, username } = req.body;
   try {
     // Insert the addresses into the user address database
-    const insertedUserAddressData = await UserAddress.insertMany(addressData);
+    const insertedUserAddressData = await UserAddress.insertMany(username, addressData);
 
     res.status(201).json({ message: 'User address data uploaded successfully.', userAddressData: insertedUserAddressData });
   } catch (err) {
