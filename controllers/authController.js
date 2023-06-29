@@ -1,4 +1,5 @@
 import User from '../models/User.js';
+import bcrypt from 'bcryptjs';
 
 export async function registerUser(req, res, next) {
     const { email, username, password } = req.body;
@@ -50,16 +51,19 @@ export async function logoutUser(req, res) {
 
 export async function updatePassword(req, res, next) {
     const { newPassword } = req.body;
+    const hashPass = await bcrypt.hash(newPassword, 10)
     const userId = req.session.passport.user;
+    console.log(userId);
   
     try {
       const user = await User.findByIdAndUpdate(userId, {
-        password: newPassword,
+        password: hashPass
+
       });
   
       res
         .status(200)
-        .json({ message: 'Password successfully updated', pw: user.password });
+        .json({ message: 'Password successfully updated', password: user.password });
     } catch (err) {
       next(err);
     }

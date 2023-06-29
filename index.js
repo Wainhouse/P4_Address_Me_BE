@@ -7,9 +7,11 @@ import MongoStore from 'connect-mongo';
 
 import './db/connection.js';
 
-
-// Routes
+// Routes Import
 import authRoute from './routes/authRoute.js';
+import addressRoute from './routes/addressRoute.js';
+import userAddressRoute from './routes/userAddressDataRoute.js'
+
 
 dotenv.config();
 const app = express();
@@ -26,16 +28,17 @@ import './config/passport.js';
 
 // Create a session cookie
 app.use(
-    session({
-      secret: process.env.SESSION_SECRET,
-      resave: false,
-      saveUninitialized: false,
-      store: MongoStore.create({
-        collection: 'sessions',
-        mongoUrl: process.env.MONGO_URI,
-      }),
-    })
-  );
+
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      collection: 'sessions',
+      mongoUrl: process.env.MONGO_URI,
+    }),
+  })
+);
 
 // Reinitialize/refresh passport middleware to avoid stale session data - e.g. a session may have expired since the last request
 app.use(passport.initialize());
@@ -45,10 +48,26 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/api', (req, res) => {
-    res.status(200).json({ message: 'Welcome to AddressMe' });
-  });
-  
+
+  res.status(200).json({ message: 'Welcome to AddressMe' });
+});
+
+//Routes  
 app.use('/api/auth', authRoute);
+app.use('/api/address', addressRoute);
+app.use('/api/useraddress', userAddressRoute);
+
+app.use((err, req, res, next) => {
+  console.error(err); // Log the error for debugging purposes
+
+  // Handle specific error types
+  if (err.name === 'ValidationError') {
+    return res.status(400).json({ message: 'Validation error' });
+  }
+
+  // General error handling
+  res.status(500).json({ message: 'Internal server error' });
+});
 
 const { PORT = 9090 } = process.env;
 

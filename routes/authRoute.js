@@ -17,7 +17,7 @@ router.patch(
     '/update-password',
     passport.authenticate('local'),
     updatePassword
-  );
+      );
 
 router.use((err, req, res, next) => {
     // Duplicate Key Error (Email already in-use)
