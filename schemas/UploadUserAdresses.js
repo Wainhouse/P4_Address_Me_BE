@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 // import Schema
 const { Schema } = mongoose
 
-const userAddressSchema = new Schema({
+const UserAddressSchema = new Schema({
 
     WAT_PAF_ADDRESS_KEY: { type: String, sparse: true, unique: false },
     WAT_COUNTRY: { type: String, sparse: true, unique: false },
@@ -18,7 +18,15 @@ const userAddressSchema = new Schema({
 
 });
 
-// Remove the unique constraint on all fields
-userAddressSchema.index({}, { unique: false });
 
-export default userAddressSchema;
+const UserIdSchema = mongoose.Schema({
+    username: { type: String, sparse: true, unique: false },
+    userAddressData: {
+        type: [{}],
+    },
+});
+
+// Remove the unique constraint on all fields
+UserAddressSchema.index({}, { unique: false });
+
+export default UserIdSchema;

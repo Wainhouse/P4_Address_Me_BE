@@ -1,6 +1,8 @@
-import userAddressSchema from '../schemas/UploadUserAdresses.js'
+import mongoose from 'mongoose';
+
+import UserIdSchema from '../schemas/UploadUserAdresses.js'
 
 // const UserId = mongoose.model('userId', usernameSchema);
-const UserAddress = mongoose.model('username', userAddressSchema);
+const UserAddressData = mongoose.model('userAddressData', UserIdSchema);
 
-export default UserAddress;
+export default UserAddressData;
