@@ -1,4 +1,8 @@
 import UserAddressData from '../models/UserAddressData.js';
+import CorrectAddress from '../models/Address.js';
+import CorrectedAddressData from '../models/CorrectedAddressData.js';
+import correctDataWaterSet from '../modules/correctDataWaterSet.js';
+
 
 export async function uploadUserAddressData(req, res) {
   const addressDataArray = req.body;
@@ -18,6 +22,15 @@ export async function uploadUserAddressData(req, res) {
     const populatedUserData = await UserAddressData.findById(insertedUserData._id)
       .select('username')
       .populate('userAddressData', '-_id');
+
+    // Fetch the correct data set from MongoDB
+    const correctData = await CorrectAddress.find().lean();
+
+    // Trigger the correctDataWaterSet function with the correct and user address data
+    const { correctedData, changes } = correctDataWaterSet(correctData, populatedUserData.userAddressData);
+
+    await CorrectedAddressData.create(correctedData);
+    console.log(changes);
 
     res.status(201).json({
       message: 'User address data uploaded successfully.',
