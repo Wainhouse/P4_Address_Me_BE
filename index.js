@@ -7,6 +7,8 @@ import MongoStore from 'connect-mongo';
 
 import './db/connection.js';
 
+import bodyParser from 'body-parser'
+
 // Routes Import
 import authRoute from './routes/authRoute.js';
 import addressRoute from './routes/addressRoute.js';
@@ -18,6 +20,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Run DB config

@@ -23,6 +23,7 @@
   "homepage": "https://github.com/Wainhouse/P4_Address_Me_BE#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
     "connect-mongo": "^5.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.1.3",
