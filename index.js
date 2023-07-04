@@ -13,14 +13,15 @@ import bodyParser from 'body-parser'
 import authRoute from './routes/authRoute.js';
 import addressRoute from './routes/addressRoute.js';
 import userAddressRoute from './routes/userAddressDataRoute.js'
+import userDashboardRoute from './routes/userDashboardRoute.js'
 
 
 dotenv.config();
 const app = express();
 
 app.use(cors());
+app.use(bodyParser.json({ limit: '300mb' }));
 app.use(express.json());
-app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Run DB config
@@ -59,6 +60,7 @@ app.get('/api', (req, res) => {
 app.use('/api/auth', authRoute);
 app.use('/api/address', addressRoute);
 app.use('/api/useraddress', userAddressRoute);
+app.use('/api/dashboard', userDashboardRoute);
 
 app.use((err, req, res, next) => {
   console.error(err); // Log the error for debugging purposes
